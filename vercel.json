@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "workout_api/main.py",
+      "use": "@vercel/python",
+      "config": {
+        "build": "bash build.sh"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "workout_api/main.py"
+    }
+  ]
+}
