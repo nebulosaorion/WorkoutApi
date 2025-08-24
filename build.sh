@@ -1,10 +1,15 @@
 #!/bin/bash
-
-# Garante que o script pare se algum comando falhar
 set -e
 
-# Instala todas as dependências do seu projeto
+echo "Installing dependencies..."
 pip install -r requirements.txt
 
-# Executa as migrações do Alembic para atualizar o banco de dados
-alembic upgrade head
+# Executa migrações apenas se DB_URL estiver configurado
+if [ -n "$DB_URL" ]; then
+    echo "Running database migrations..."
+    alembic upgrade head
+else
+    echo "DB_URL not set, skipping migrations"
+fi
+
+echo "Build completed successfully!"
